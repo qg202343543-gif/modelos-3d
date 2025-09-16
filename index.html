@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Modelos 3D - Click para cambiar</title>
+  <!-- Carga el componente model-viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body { display:flex; justify-content:center; align-items:center; height:100vh; margin:0; background:#f0f0f0; }
+    model-viewer { width:480px; height:480px; border:2px solid #444; border-radius:10px; background:white; }
+    p { text-align:center; font-family:Arial, sans-serif; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div>
+    <!-- Aquí se muestra el modelo 3D -->
+    <model-viewer id="visor" src="modelo1.glb" alt="Modelo 3D" auto-rotate camera-controls></model-viewer>
+    <p>Toca (o haz click) sobre el modelo para cambiarlo</p>
+  </div>
+
+  <script>
+    // NOMBRES de los archivos que pondrás en la carpeta (cambia si tienes otros nombres)
+    const modelos = ["modelo1.glb", "modelo2.glb", "modelo3.glb"];
+    let indice = 0;
+    const visor = document.getElementById("visor");
+
+    // Cada vez que se haga click (o toque), cambiamos al siguiente modelo
+    visor.addEventListener("click", () => {
+      indice = (indice + 1) % modelos.length;
+      visor.src = modelos[indice];
+    });
+  </script>
+</body>
+</html>
