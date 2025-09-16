@@ -1,34 +1,81 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Modelos 3D - Click para cambiar</title>
-  <!-- Carga el componente model-viewer -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <style>
-    body { display:flex; justify-content:center; align-items:center; height:100vh; margin:0; background:#f0f0f0; }
-    model-viewer { width:480px; height:480px; border:2px solid #444; border-radius:10px; background:white; }
-    p { text-align:center; font-family:Arial, sans-serif; margin-top:8px; }
-  </style>
-</head>
-<body>
-  <div>
-    <!-- Aquí se muestra el modelo 3D -->
-    <model-viewer id="visor" src="modelo1.glb" alt="Modelo 3D" auto-rotate camera-controls></model-viewer>
-    <p>Toca (o haz click) sobre el modelo para cambiarlo</p>
-  </div>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
 
-  <script>
-    // NOMBRES de los archivos que pondrás en la carpeta (cambia si tienes otros nombres)
-    const modelos = ["modelo1.glb", "modelo2.glb", "modelo3.glb"];
-    let indice = 0;
-    const visor = document.getElementById("visor");
+    <!-- Escena para target 1 -->
+    <a-scene mindar-image="imageTargetSrc: ./targets1.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <a-asset-item id="TigerModel" src="./Tiger.glb"></a-asset-item>
+      </a-assets>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model id="modelTiger" src="#TigerModel" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
+      </a-entity>
+    </a-scene>
 
-    // Cada vez que se haga click (o toque), cambiamos al siguiente modelo
-    visor.addEventListener("click", () => {
-      indice = (indice + 1) % modelos.length;
-      visor.src = modelos[indice];
-    });
-  </script>
-</body>
+    <!-- Escena para target 2 -->
+    <a-scene mindar-image="imageTargetSrc: ./targets2.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <a-asset-item id="model1Asset" src="./modelo1.glb"></a-asset-item>
+      </a-assets>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model id="model1" src="#model1Asset" scale="0.005 0.005 0.005" position="0 0 0.5" visible="false"></a-gltf-model>
+      </a-entity>
+    </a-scene>
+
+    <!-- Escena para target 3 -->
+    <a-scene mindar-image="imageTargetSrc: ./targets3.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <a-asset-item id="model2Asset" src="./modelo2.glb"></a-asset-item>
+      </a-assets>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model id="model2" src="#model2Asset" scale="0.005 0.005 0.005" position="0 0 0.5" visible="false"></a-gltf-model>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modelTiger = document.querySelector("#modelTiger");
+        const model1 = document.querySelector("#model1");
+        const model2 = document.querySelector("#model2");
+
+        // Clic en Tiger
+        modelTiger.addEventListener("click", () => {
+          modelTiger.setAttribute("visible", "false");
+          model1.setAttribute("visible", "true");
+        });
+
+        // Clic en modelo1
+        model1.addEventListener("click", () => {
+          model1.setAttribute("visible", "false");
+          model2.setAttribute("visible", "true");
+        });
+
+        // Clic en modelo2
+        model2.addEventListener("click", () => {
+          model2.setAttribute("visible", "false");
+          modelTiger.setAttribute("visible", "true");
+        });
+      });
+    </script>
+
+  </body>
 </html>
