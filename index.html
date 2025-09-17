@@ -5,7 +5,6 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
-
     <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
              color-space="sRGB" 
              renderer="colorManagement: true, physicallyCorrectLights" 
@@ -13,44 +12,36 @@
              device-orientation-permission-ui="enabled: false">
 
       <a-assets>
-        <!-- Las imágenes de referencia -->
+        <!-- Imágenes de referencia -->
         <img id="target1Img" src="./target1.jpg" />
         <img id="target2Img" src="./target2.jpg" />
-        <img id="target3Img" src="./target3.jpg" />
 
         <!-- Modelos -->
         <a-asset-item id="TigerModel" src="./Tiger.glb"></a-asset-item>
-        <a-asset-item id="model1Asset" src="./modelo1.glb"></a-asset-item>
-        <a-asset-item id="model2Asset" src="./modelo2.glb"></a-asset-item>
+        <a-asset-item id="Model2" src="./modelo2.glb"></a-asset-item>
+
+        <!-- Para mostrar el archivo .mind como plano visual (opcional) -->
+        <a-asset-item id="MindFile" src="./targets.mind"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Target 1 → Tiger -->
+      <!-- Target 1 → Tiger.glb -->
       <a-entity mindar-image-target="targetIndex: 0">
         <a-plane src="#target1Img" position="0 0 0" height="0.552" width="1"></a-plane>
         <a-gltf-model src="#TigerModel" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
       </a-entity>
 
-      <!-- Target 2 → modelo1 -->
+      <!-- Target 2 → target2.jpg + .mind (opcional como plano) + modelo2.glb -->
       <a-entity mindar-image-target="targetIndex: 1">
+        <!-- plano con la imagen del target -->
         <a-plane src="#target2Img" position="0 0 0" height="0.552" width="1"></a-plane>
-        <a-gltf-model src="#model1Asset" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
-      </a-entity>
-
-      <!-- Target 3 → modelo2 -->
-      <a-entity mindar-image-target="targetIndex: 2">
-        <a-plane src="#target3Img" position="0 0 0" height="0.552" width="1"></a-plane>
-        <a-gltf-model src="#model2Asset" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
+        <!-- modelo 3D -->
+        <a-gltf-model src="#Model2" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
+        <!-- MOSTRAR el archivo .mind como "plano de texto" (opcional) -->
+        <a-text value="targets.mind" color="yellow" position="0 -0.7 0"></a-text>
       </a-entity>
 
     </a-scene>
-
-  </body>
-</html>
-
-
-    </a-scene>
-
   </body>
 </html>
