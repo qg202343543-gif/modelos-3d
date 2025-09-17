@@ -6,82 +6,43 @@
   </head>
   <body>
 
-    <!-- Escena para target 1 -->
-    <a-scene mindar-image="imageTargetSrc: ./targets1.mind;" 
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
              color-space="sRGB" 
              renderer="colorManagement: true, physicallyCorrectLights" 
              vr-mode-ui="enabled: false" 
              device-orientation-permission-ui="enabled: false">
+
       <a-assets>
         <img id="target1Img" src="./target1.jpg" />
+        <img id="target2Img" src="./target2.jpg" />
+        <img id="target3Img" src="./target3.jpg" />
+
         <a-asset-item id="TigerModel" src="./Tiger.glb"></a-asset-item>
+        <a-asset-item id="model1Asset" src="./modelo1.glb"></a-asset-item>
+        <a-asset-item id="model2Asset" src="./modelo2.glb"></a-asset-item>
       </a-assets>
+
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Target 1 -->
       <a-entity mindar-image-target="targetIndex: 0">
         <a-plane src="#target1Img" position="0 0 0" height="0.552" width="1"></a-plane>
         <a-gltf-model id="modelTiger" src="#TigerModel" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
       </a-entity>
-    </a-scene>
 
-    <!-- Escena para target 2 -->
-    <a-scene mindar-image="imageTargetSrc: ./targets2.mind;" 
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <img id="target2Img" src="./target2.jpg" />
-        <a-asset-item id="model1Asset" src="./modelo1.glb"></a-asset-item>
-      </a-assets>
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane src="#target2Img" position="0 -2 0" height="0.552" width="1"></a-plane>
-        <a-gltf-model id="model1" src="#model1Asset" scale="0.005 0.005 0.005" position="0 0 0.5" visible="false"></a-gltf-model>
+      <!-- Target 2 -->
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-plane src="#target2Img" position="0 0 0" height="0.552" width="1"></a-plane>
+        <a-gltf-model id="model1" src="#model1Asset" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
       </a-entity>
-    </a-scene>
 
-    <!-- Escena para target 3 -->
-    <a-scene mindar-image="imageTargetSrc: ./targets3.mind;" 
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <img id="target3Img" src="./target3.jpg" />
-        <a-asset-item id="model2Asset" src="./modelo2.glb"></a-asset-item>
-      </a-assets>
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane src="#target3Img" position="0 0 2" height="0.552" width="1"></a-plane>
-        <a-gltf-model id="model2" src="#model2Asset" scale="0.005 0.005 0.005" position="0 0 0.5" visible="false"></a-gltf-model>
+      <!-- Target 3 -->
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-plane src="#target3Img" position="0 0 0" height="0.552" width="1"></a-plane>
+        <a-gltf-model id="model2" src="#model2Asset" scale="0.005 0.005 0.005" position="0 0 0.5"></a-gltf-model>
       </a-entity>
+
     </a-scene>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const modelTiger = document.querySelector("#modelTiger");
-        const model1 = document.querySelector("#model1");
-        const model2 = document.querySelector("#model2");
-
-        // Clic en Tiger
-        modelTiger.addEventListener("click", () => {
-          modelTiger.setAttribute("visible", "false");
-          model1.setAttribute("visible", "true");
-        });
-
-        // Clic en modelo1
-        model1.addEventListener("click", () => {
-          model1.setAttribute("visible", "false");
-          model2.setAttribute("visible", "true");
-        });
-
-        // Clic en modelo2
-        model2.addEventListener("click", () => {
-          model2.setAttribute("visible", "false");
-          modelTiger.setAttribute("visible", "true");
-        });
-      });
-    </script>
 
   </body>
 </html>
