@@ -1,0 +1,20 @@
+{
+  "targets": [
+    {
+      "name": "target1",
+      "image": "target1.jpg",
+      "content": {
+        "model": "modelo1.glb",
+        "audio": "sonido1.mid"
+      }
+    },
+    {
+      "name": "target2",
+      "image": "target2.jpg",
+      "content": {
+        "model": "modelo2.glb",
+        "audio": "sonido2.mid"
+      }
+    }
+  ]
+}
